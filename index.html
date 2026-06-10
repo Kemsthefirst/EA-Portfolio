@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folakemi Lawal — Executive Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F2A44;
+    --gold: #B8935A;
+    --gold-light: #D4B483;
+    --cream: #F8F4EE;
+    --warm-white: #FDFAF6;
+    --text: #1A1A1A;
+    --muted: #6B6B6B;
+    --border: #E0D8CE;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--text); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 80px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(15,42,68,0.97); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(184,147,90,0.2);
+    animation: slideDown 0.6s ease forwards;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #fff; font-weight: 300; letter-spacing: 1px; }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  .hero { min-height: 100vh; background: var(--navy); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; padding-top: 60px; }
+  .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(184,147,90,0.12) 0%, transparent 70%); }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 80px 60px 80px 80px; animation: fadeUp 0.9s ease forwards 0.2s; opacity: 0; transform: translateY(30px); position: relative; z-index: 1; }
+  .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 80px); font-weight: 300; color: #fff; line-height: 1.05; margin-bottom: 8px; }
+  .hero-name span { font-style: italic; color: var(--gold-light); }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 2vw, 24px); font-weight: 300; color: rgba(255,255,255,0.55); margin-bottom: 32px; letter-spacing: 1px; }
+  .hero-desc { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.85; max-width: 400px; margin-bottom: 44px; }
+  .hero-cta { display: flex; gap: 16px; }
+  .btn-primary { padding: 14px 32px; background: var(--gold); color: #fff; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline { padding: 14px 32px; border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.75); text-decoration: none; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-right { display: flex; align-items: center; justify-content: center; padding: 80px; opacity: 0; animation: fadeIn 1s ease forwards 0.6s; position: relative; z-index: 1; }
+  .hero-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,147,90,0.25); padding: 44px 38px; width: 100%; max-width: 370px; }
+  .hero-card-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; font-weight: 500; }
+  .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); gap: 16px; }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 300; white-space: nowrap; }
+  .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: rgba(255,255,255,0.85); font-weight: 400; text-align: right; }
+
+  section { padding: 100px 80px; }
+  .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; font-weight: 500; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 52px); font-weight: 300; color: var(--navy); line-height: 1.15; margin-bottom: 18px; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-intro { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 560px; font-weight: 300; }
+
+  .about { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-text p { font-size: 15px; color: #444; line-height: 1.85; margin-bottom: 18px; font-weight: 300; }
+  .about-text p strong { color: var(--navy); font-weight: 500; }
+  .about-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .pillar { padding: 26px 22px; background: #fff; border-left: 3px solid var(--gold); opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .pillar.visible { opacity: 1; transform: translateY(0); }
+  .pillar-icon { font-size: 20px; margin-bottom: 10px; }
+  .pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--navy); margin-bottom: 6px; font-weight: 600; }
+  .pillar-desc { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  .experience { background: var(--warm-white); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), transparent); }
+  .timeline-item { padding-left: 40px; padding-bottom: 48px; position: relative; opacity: 0; transform: translateX(-20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-item::before { content: ''; position: absolute; left: -5px; top: 8px; width: 11px; height: 11px; border-radius: 50%; background: var(--gold); border: 2px solid var(--warm-white); }
+  .timeline-date { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; font-weight: 500; }
+  .timeline-role { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--navy); font-weight: 600; margin-bottom: 4px; }
+  .timeline-company { font-size: 13px; color: var(--muted); margin-bottom: 14px; font-style: italic; }
+  .timeline-bullets { list-style: none; }
+  .timeline-bullets li { font-size: 14px; color: #444; line-height: 1.7; padding: 5px 0 5px 16px; position: relative; font-weight: 300; border-bottom: 1px solid var(--border); }
+  .timeline-bullets li:last-child { border-bottom: none; }
+  .timeline-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 12px; }
+
+  .skills { background: var(--navy); }
+  .skills .section-title { color: #fff; }
+  .skills .section-intro { color: rgba(255,255,255,0.45); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; }
+  .skill-block { background: rgba(255,255,255,0.03); padding: 32px 28px; border: 1px solid rgba(184,147,90,0.12); opacity: 0; transform: translateY(15px); transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s; }
+  .skill-block.visible { opacity: 1; transform: translateY(0); }
+  .skill-block:hover { background: rgba(184,147,90,0.07); }
+  .skill-block-title { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--gold-light); margin-bottom: 18px; font-weight: 400; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .skill-tag { font-size: 11px; padding: 4px 11px; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); font-weight: 300; }
+
+  .showcase { background: var(--cream); }
+  .showcase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 56px; }
+  .showcase-card { background: #fff; padding: 40px; border: 1px solid var(--border); position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s; }
+  .showcase-card.visible { opacity: 1; transform: translateY(0); }
+  .showcase-card:hover { box-shadow: 0 12px 40px rgba(15,42,68,0.08); transform: translateY(-3px); }
+  .showcase-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--gold); }
+  .showcase-num { font-family: 'Cormorant Garamond', serif; font-size: 44px; color: var(--border); font-weight: 300; line-height: 1; margin-bottom: 14px; }
+  .showcase-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--navy); font-weight: 600; margin-bottom: 12px; }
+  .showcase-desc { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+  .contact { background: var(--navy); text-align: center; padding: 100px 80px; }
+  .contact .section-title { color: #fff; max-width: 480px; margin: 0 auto 14px; }
+  .contact-sub { font-size: 15px; color: rgba(255,255,255,0.45); margin-bottom: 44px; font-weight: 300; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .divider { width: 50px; height: 1px; background: var(--gold); margin: 0 auto 48px; opacity: 0.5; }
+  .contact-info { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-bottom: 44px; }
+  .contact-item-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 500; }
+  .contact-item-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: rgba(255,255,255,0.8); font-weight: 300; }
+  .contact-item-value a { color: inherit; text-decoration: none; }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 100px 28px 40px; }
+    .hero-right { padding: 20px 28px 60px; }
+    section { padding: 70px 28px; }
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .showcase-grid { grid-template-columns: 1fr; }
+    .exp-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .contact { padding: 70px 28px; }
+    .contact-info { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Folakemi <span>Lawal</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#showcase">Showcase</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero" id="top">
+  <div class="hero-left">
+    <p class="hero-tag">Executive Assistant Portfolio</p>
+    <h1 class="hero-name">Folakemi<br><span>Lawal</span></h1>
+    <p class="hero-title">Personal & Executive Assistant</p>
+    <p class="hero-desc">I keep executives focused, organised, and ahead of the day. Calendars managed. Communications handled. Problems solved before they become problems.</p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <p class="hero-card-title">At a Glance</p>
+      <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Nigeria (Remote-Ready)</span></div>
+      <div class="stat-row"><span class="stat-label">Executive Support</span><span class="stat-value">C-Suite Level</span></div>
+      <div class="stat-row"><span class="stat-label">Core Strength</span><span class="stat-value">Operations & Communications</span></div>
+      <div class="stat-row"><span class="stat-label">Tools</span><span class="stat-value">Google Workspace, Excel, PowerPoint</span></div>
+      <div class="stat-row"><span class="stat-label">Education</span><span class="stat-value">B.Sc. Marketing — RSU, 2019</span></div>
+      <div class="stat-row"><span class="stat-label">Availability</span><span class="stat-value">Full-time, Immediate</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-text">
+    <span class="section-label">About Me</span>
+    <h2 class="section-title">The person behind<br><em>the schedule</em></h2>
+    <p>I did not plan to become an EA — I became one because I am genuinely good at it. I am the kind of person who notices what needs to be done before being told, follows up without being asked, and makes sure the people I support never have to chase information.</p>
+    <p>At Ozone Emporium, I managed a CEO's diary, communications, travel, procurement, vendors, events, and household operations simultaneously. I was not just an assistant — I was the system that kept things running.</p>
+    <p>I hold a <strong>B.Sc. in Marketing from Rivers State University</strong> and bring a structured, detail-driven approach to everything I do.</p>
+  </div>
+  <div class="about-pillars">
+    <div class="pillar"><div class="pillar-icon">🛡️</div><div class="pillar-title">Gatekeeper</div><p class="pillar-desc">I protect executive time and manage access with discretion and professionalism.</p></div>
+    <div class="pillar"><div class="pillar-icon">📋</div><div class="pillar-title">Organiser</div><p class="pillar-desc">Complex schedules, competing priorities, multi-stakeholder coordination — handled.</p></div>
+    <div class="pillar"><div class="pillar-icon">⚡</div><div class="pillar-title">Problem-Solver</div><p class="pillar-desc">I anticipate issues before they escalate and resolve them quietly.</p></div>
+    <div class="pillar"><div class="pillar-icon">✉️</div><div class="pillar-title">Communicator</div><p class="pillar-desc">Professional correspondence, reports, and presentations — clear and on-brand.</p></div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <div class="exp-header">
+    <div>
+      <span class="section-label">Career History</span>
+      <h2 class="section-title">Where I have<br><em>delivered</em></h2>
+    </div>
+    <p class="section-intro" style="max-width:320px;">Every role has sharpened a different edge — operations, communications, coordination, and people management.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <p class="timeline-date">Nov 2025 — Present</p>
+      <h3 class="timeline-role">HR / Admin Officer</h3>
+      <p class="timeline-company">Memaco Alliance Limited</p>
+      <ul class="timeline-bullets">
+        <li>Maintain staff records and HR documentation for a growing startup.</li>
+        <li>Collect and collate departmental reports, tracking submissions and flagging gaps to management.</li>
+        <li>Track staff behavioural data using Excel to support HR decision-making.</li>
+        <li>Design and deliver leadership-based training courses using PowerPoint.</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <p class="timeline-date">Sep 2022 — Oct 2023</p>
+      <h3 class="timeline-role">Personal Assistant & Operations Manager</h3>
+      <p class="timeline-company">Ozone Emporium</p>
+      <ul class="timeline-bullets">
+        <li>Managed CEO's emails, calls, diary, and travel — acting as primary liaison between executive and staff.</li>
+        <li>Organised and executed special events, ensuring seamless and memorable client experiences.</li>
+        <li>Oversaw procurement, vendor selection, negotiation, and contract management.</li>
+        <li>Managed expense reports and financial documentation with full accuracy and accountability.</li>
+        <li>Supervised auxiliary staff and maintained office and household operations to a high standard.</li>
+        <li>Prepared management reports, presentations, and correspondence on behalf of the CEO.</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <p class="timeline-date">Feb 2022 — Sep 2022</p>
+      <h3 class="timeline-role">Business Development Officer</h3>
+      <p class="timeline-company">Gantt Works Business Development Services</p>
+      <ul class="timeline-bullets">
+        <li>Managed customer relations and implemented company marketing strategy.</li>
+        <li>Conducted field and online research; maintained accurate loan and grant records in Excel.</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <p class="timeline-date">Mar 2021 — Feb 2022</p>
+      <h3 class="timeline-role">Customer Service Lead (NYSC)</h3>
+      <p class="timeline-company">Synto-Energia / Solgreen Agribusiness & Biofuel Ltd</p>
+      <ul class="timeline-bullets">
+        <li>Built professional client relationships and prepared daily management reports.</li>
+        <li>Coordinated team members to achieve company targets and managed beneficiary goods distribution.</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <p class="timeline-date">Nov 2019 — Jul 2020</p>
+      <h3 class="timeline-role">After Sales Representative</h3>
+      <p class="timeline-company">Multichoice Group — Customer Resource Management</p>
+      <ul class="timeline-bullets">
+        <li>Achieved subscription targets and handled customer complaints professionally.</li>
+        <li>Managed client records and marketed products to new and existing customers.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="skills" id="skills">
+  <span class="section-label">What I Bring</span>
+  <h2 class="section-title" style="color:#fff;">Skills & <em>Capabilities</em></h2>
+  <div class="skills-grid">
+    <div class="skill-block"><h3 class="skill-block-title">Executive Support</h3><div class="skill-tags"><span class="skill-tag">Calendar Management</span><span class="skill-tag">Diary Management</span><span class="skill-tag">Email Management</span><span class="skill-tag">Travel Coordination</span><span class="skill-tag">Stakeholder Liaison</span><span class="skill-tag">Gatekeeping</span><span class="skill-tag">Confidentiality</span></div></div>
+    <div class="skill-block"><h3 class="skill-block-title">Operations & Admin</h3><div class="skill-tags"><span class="skill-tag">Procurement</span><span class="skill-tag">Vendor Management</span><span class="skill-tag">Contract Management</span><span class="skill-tag">Expense Reporting</span><span class="skill-tag">Event Planning</span><span class="skill-tag">Document Management</span><span class="skill-tag">Staff Coordination</span></div></div>
+    <div class="skill-block"><h3 class="skill-block-title">Tools & Technology</h3><div class="skill-tags"><span class="skill-tag">Microsoft Excel</span><span class="skill-tag">Microsoft PowerPoint</span><span class="skill-tag">Microsoft Word</span><span class="skill-tag">Google Workspace</span><span class="skill-tag">Google Calendar</span><span class="skill-tag">Google Drive</span><span class="skill-tag">Asana</span><span class="skill-tag">Trello</span><span class="skill-tag">Notion</span></div></div>
+    <div class="skill-block"><h3 class="skill-block-title">Communication</h3><div class="skill-tags"><span class="skill-tag">Report Writing</span><span class="skill-tag">Professional Correspondence</span><span class="skill-tag">Presentation Prep</span><span class="skill-tag">Meeting Minutes</span><span class="skill-tag">Briefing Notes</span></div></div>
+    <div class="skill-block"><h3 class="skill-block-title">People & Leadership</h3><div class="skill-tags"><span class="skill-tag">Team Coordination</span><span class="skill-tag">Training & Development</span><span class="skill-tag">Conflict Resolution</span><span class="skill-tag">Discretion</span><span class="skill-tag">Attention to Detail</span><span class="skill-tag">Initiative</span></div></div>
+    <div class="skill-block"><h3 class="skill-block-title">Education</h3><div class="skill-tags"><span class="skill-tag">B.Sc. Marketing</span><span class="skill-tag">Rivers State University</span><span class="skill-tag">Graduated 2019</span></div></div>
+  </div>
+</section>
+
+<section class="showcase" id="showcase">
+  <span class="section-label">What I Do Best</span>
+  <h2 class="section-title">Core <em>Competencies</em></h2>
+  <p class="section-intro">Four things that define how I work and why executives trust me with their most important asset — their time.</p>
+  <div class="showcase-grid">
+    <div class="showcase-card"><div class="showcase-num">01</div><h3 class="showcase-title">Priority & Time Management</h3><p class="showcase-desc">I assess every incoming task by urgency, impact, and dependencies. The CEO focuses on decisions — I handle everything else. Nothing falls through the cracks and nothing reaches the executive's desk without being properly filtered first.</p></div>
+    <div class="showcase-card"><div class="showcase-num">02</div><h3 class="showcase-title">Communication & Correspondence</h3><p class="showcase-desc">From scheduling emails to stakeholder briefs, I write professionally and represent the executive's voice accurately. I handle inboxes, draft responses, prepare reports, and ensure every communication goes out on time and on point.</p></div>
+    <div class="showcase-card"><div class="showcase-num">03</div><h3 class="showcase-title">Operations & Logistics</h3><p class="showcase-desc">Travel bookings, vendor negotiations, event execution, procurement — I have managed all of it. I do not wait to be told. I identify what needs to happen and make it happen, with full documentation and accountability.</p></div>
+    <div class="showcase-card"><div class="showcase-num">04</div><h3 class="showcase-title">Discretion & Professionalism</h3><p class="showcase-desc">Working at executive level means handling sensitive information and high-stakes situations with calm and confidentiality. I understand the difference between what needs to be escalated and what I should absorb quietly.</p></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <span class="section-label" style="display:block; text-align:center;">Let's Connect</span>
+  <h2 class="section-title">Ready to make your<br><em>day run smoothly</em></h2>
+  <div class="divider"></div>
+  <p class="contact-sub">Available for full-time EA/PA roles — remote or on-site. Let's talk about how I can support your executive team.</p>
+  <div class="contact-info">
+    <div class="contact-item"><p class="contact-item-label">Email</p><p class="contact-item-value"><a href="mailto:foly.lawal97@gmail.com">foly.lawal97@gmail.com</a></p></div>
+    <div class="contact-item"><p class="contact-item-label">Phone</p><p class="contact-item-value"><a href="tel:09032446674">09032446674</a></p></div>
+    <div class="contact-item"><p class="contact-item-label">LinkedIn</p><p class="contact-item-value"><a href="https://linkedin.com/in/folakemi-lawal593836223" target="_blank">folakemi-lawal</a></p></div>
+  </div>
+  <a href="#" class="btn-primary">Download CV</a>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.pillar, .timeline-item, .skill-block, .showcase-card').forEach((el, i) => {
+    el.dataset.delay = (i % 3) * 100;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
